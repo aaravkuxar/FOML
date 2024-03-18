@@ -1,0 +1,32 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import train_test_split
+
+df = pd.read_csv(r'/home/aaravk/Pictures/Social_Network_Ads.csv')
+print(df)
+
+df['Gender'].replace('Male',0,inplace=True)
+print(df)
+
+df['Gender'].replace('Female',1,inplace=True)
+print(df)
+
+x=df.iloc[:,[0,1,2,3]]
+print(x)
+
+y=df.iloc[:,[-1]]
+print(y)
+
+x_train,y_train,x_test,y_test=train_test_split(x,y,test_size=0.2)
+print(x_train,y_train,x_test,y_test)
+
+model = GaussianNB()
+print(model.fit(x,y))
+
+print(model.score(x,y))
+
+mod=model.predict(x)
+print(mod)
+
